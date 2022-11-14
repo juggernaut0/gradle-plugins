@@ -1,0 +1,41 @@
+name: Gradle Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    - name: Build & Test
+      run: ./gradlew build
+
+  publish:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    - uses: actions/checkout@master
+      with:
+        repository: juggernaut0/juggernaut0.github.io
+        path: pages
+        token: ${{ secrets.PUBLISH_TOKEN }}
+    - name: Publish
+      run: |
+        ./gradlew publishAllPublicationsToPagesRepository
+        cd pages
+        git checkout -b gp-${{ github.sha }}
+        git add m2
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Update gradle-plugins"
+        git push origin gp-${{ github.sha }}
