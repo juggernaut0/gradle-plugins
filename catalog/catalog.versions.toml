@@ -1,0 +1,55 @@
+[versions]
+dagger = "2.44.2"
+ktor = "2.1.3"
+multiplatform-utils = "0.7.0"
+twarner-auth = "16"
+
+[libraries]
+config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
+
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+
+flyway-core = { module = "org.flywaydb:flyway-core", version = "9.8.2" }
+
+ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-client-apache = { module = "io.ktor:ktor-client-apache" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock" }
+ktor-server-auth = { module = "io.ktor:ktor-server-auth" }
+ktor-server-callLogging = { module = "io.ktor:ktor-server-call-logging" }
+ktor-server-core = { module = "io.ktor:ktor-server-core" }
+ktor-server-jetty = { module = "io.ktor:ktor-server-jetty" }
+ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages" }
+ktor-server-testHost = { module = "io.ktor:ktor-server-test-host" }
+
+kui = { module = "com.github.juggernaut0.kui:kui", version = "0.14.1" }
+
+logback = { module = "ch.qos.logback:logback-classic", version = "1.4.5" }
+
+multiplatform-utils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
+multiplatform-utils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
+
+postgresql = { module = "org.postgresql:postgresql", version = "42.5.0" }
+
+r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.0.RELEASE" }
+r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
+
+twarner-auth-common = { module = "dev.twarner.auth:auth-common", version.ref = "twarner-auth" }
+twarner-auth-ui = { module = "dev.twarner.auth:auth-ui", version.ref = "twarner-auth" }
+
+[bundles]
+ktor-server-jetty = [
+    "ktor-server-core",
+    "ktor-server-jetty",
+    "ktor-server-callLogging",
+    "ktor-server-statusPages",
+]
+r2dbc-postgresql = [
+    "r2dbc-postgresql",
+    "r2dbc-pool",
+]
+
+[plugins]
+jooq = "nu.studer.jooq:8.0"
+docker-api = "com.bmuschko.docker-remote-api:9.0.1"
