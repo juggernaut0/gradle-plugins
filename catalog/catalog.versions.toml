@@ -5,6 +5,8 @@ multiplatform-utils = "0.7.0"
 twarner-auth = "16"
 
 [libraries]
+asyncLite = { module = "com.github.juggernaut0:async-lite", version = "0.2.0" }
+
 config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
 
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
@@ -13,22 +15,22 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 flyway-core = { module = "org.flywaydb:flyway-core", version = "9.8.2" }
 
 ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
-ktor-client-apache = { module = "io.ktor:ktor-client-apache" }
-ktor-client-cio = { module = "io.ktor:ktor-client-cio" }
-ktor-client-mock = { module = "io.ktor:ktor-client-mock" }
-ktor-server-auth = { module = "io.ktor:ktor-server-auth" }
-ktor-server-callLogging = { module = "io.ktor:ktor-server-call-logging" }
-ktor-server-core = { module = "io.ktor:ktor-server-core" }
-ktor-server-jetty = { module = "io.ktor:ktor-server-jetty" }
-ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages" }
-ktor-server-testHost = { module = "io.ktor:ktor-server-test-host" }
+ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
+ktor-server-callLogging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-jetty = { module = "io.ktor:ktor-server-jetty", version.ref = "ktor" }
+ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
+ktor-server-testHost = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
 kui = { module = "com.github.juggernaut0.kui:kui", version = "0.14.1" }
 
 logback = { module = "ch.qos.logback:logback-classic", version = "1.4.5" }
 
-multiplatform-utils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
-multiplatform-utils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
+multiplatformUtils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
+multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
 
 postgresql = { module = "org.postgresql:postgresql", version = "42.5.0" }
 
