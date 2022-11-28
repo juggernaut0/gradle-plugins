@@ -12,7 +12,7 @@ config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
-flyway-core = { module = "org.flywaydb:flyway-core", version = "9.8.2" }
+flyway-core = { module = "org.flywaydb:flyway-core", version = "9.8.3" }
 
 ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
@@ -32,7 +32,7 @@ logback = { module = "ch.qos.logback:logback-classic", version = "1.4.5" }
 multiplatformUtils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
 multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
 
-postgresql = { module = "org.postgresql:postgresql", version = "42.5.0" }
+postgresql = { module = "org.postgresql:postgresql", version = "42.5.1" }
 
 r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.0.RELEASE" }
 r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
