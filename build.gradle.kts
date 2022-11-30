@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.21"
     `java-gradle-plugin`
     `kotlin-dsl`
     `maven-publish`
@@ -13,12 +12,23 @@ version = projectVersion
 
 repositories {
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
     implementation("de.undercouch:gradle-download-task:5.3.0")
+    implementation("com.bmuschko.docker-remote-api:com.bmuschko.docker-remote-api.gradle.plugin:9.0.1")
 
     testImplementation(kotlin("test"))
+}
+
+gradlePlugin {
+    plugins {
+        create("docker") {
+            id = "dev.twarner.docker"
+            implementationClass = "dev.twarner.gradle.DockerPlugin"
+        }
+    }
 }
 
 publishing {

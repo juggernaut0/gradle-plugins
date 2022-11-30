@@ -1,4 +1,4 @@
 
 rootProject.name = "gradle-plugins"
 
-include("catalog", "catalog:test")
+include("catalog", "catalog:test", "kotlin")

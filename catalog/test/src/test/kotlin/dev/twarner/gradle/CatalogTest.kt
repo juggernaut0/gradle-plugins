@@ -20,6 +20,7 @@ class CatalogTest {
             val node = mapper.readTree(File(tomlLocation))
             libsKeys = node["libraries"].let { it as ObjectNode }.fieldNames().asSequence().toList()
                 .filterNot { it.startsWith("twarner") } // local libs won't be able to resolve
+                .filterNot { it == "ktor-client-js" } // TODO test resolution for js libs
                 .map { it.replace('-', '.') }
         }
     }
