@@ -48,3 +48,9 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
 
+afterEvaluate {
+    tasks.compileTestKotlin {
+        kotlinOptions.languageVersion = "1.7"
+        kotlinOptions.apiVersion = "1.7"
+    }
+}

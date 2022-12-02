@@ -51,9 +51,9 @@ class DockerPlugin : Plugin<Project> {
             dependsOn(dockerfile)
 
             if (version.toString().endsWith("SNAPSHOT")) {
-                images.add("${extension.tagBase}${rootProject.name}:SNAPSHOT")
+                images.add(extension.tagBase.map { tagBase -> "$tagBase${rootProject.name}:SNAPSHOT" })
             } else {
-                images.add("${extension.tagBase}${rootProject.name}:$version")
+                images.add(extension.tagBase.map { tagBase -> "$tagBase${rootProject.name}:$version" })
             }
         }
     }
