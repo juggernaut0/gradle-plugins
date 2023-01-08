@@ -19,6 +19,8 @@ dependencies {
     implementation("de.undercouch:gradle-download-task:5.3.0")
     implementation("com.bmuschko.docker-remote-api:com.bmuschko.docker-remote-api.gradle.plugin:9.1.0")
 
+    compileOnly(kotlin("gradle-plugin"))
+
     testImplementation(kotlin("test"))
 }
 
