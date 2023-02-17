@@ -1,6 +1,6 @@
 [versions]
-dagger = "2.44.2"
-ktor = "2.2.2"
+dagger = "2.45"
+ktor = "2.2.3"
 multiplatform-utils = "0.7.0"
 twarner-auth = "16"
 
@@ -12,7 +12,7 @@ config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
-flyway-core = { module = "org.flywaydb:flyway-core", version = "9.11.0" }
+flyway-core = { module = "org.flywaydb:flyway-core", version = "9.15.0" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.4" }
 
@@ -35,7 +35,7 @@ logback = { module = "ch.qos.logback:logback-classic", version = "1.4.5" }
 multiplatformUtils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
 multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
 
-postgresql = { module = "org.postgresql:postgresql", version = "42.5.1" }
+postgresql = { module = "org.postgresql:postgresql", version = "42.5.4" }
 
 r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.0.RELEASE" }
 r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
@@ -57,4 +57,4 @@ r2dbc-postgresql = [
 
 [plugins]
 jooq = "nu.studer.jooq:8.1"
-docker-api = "com.bmuschko.docker-remote-api:9.1.0"
+docker-api = "com.bmuschko.docker-remote-api:9.2.1"
