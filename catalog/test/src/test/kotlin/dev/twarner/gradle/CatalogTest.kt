@@ -14,13 +14,14 @@ class CatalogTest {
     private companion object {
         private val tomlLocation = System.getProperty("tomlLocation")!!
         private val libsKeys: List<String>
+        private val jsLibs = setOf("asyncLite", "ktor-client-js", "kui")
 
         init {
             val mapper = TomlMapper()
             val node = mapper.readTree(File(tomlLocation))
             libsKeys = node["libraries"].let { it as ObjectNode }.fieldNames().asSequence().toList()
                 .filterNot { it.startsWith("twarner") } // local libs won't be able to resolve
-                .filterNot { it == "ktor-client-js" } // TODO test resolution for js libs
+                .filterNot { it in jsLibs } // TODO test resolution for js libs
                 .map { it.replace('-', '.') }
         }
     }
