@@ -5,7 +5,7 @@ multiplatform-utils = "0.7.0"
 twarner-auth = "16"
 
 [libraries]
-asyncLite = { module = "com.github.juggernaut0:async-lite", version = "0.2.0" }
+asyncLite = { module = "com.github.juggernaut0:async-lite", version = "0.3.0" }
 
 config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
 

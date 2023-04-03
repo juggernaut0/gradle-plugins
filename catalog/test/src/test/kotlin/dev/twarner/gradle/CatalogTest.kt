@@ -14,7 +14,7 @@ class CatalogTest {
     private companion object {
         private val tomlLocation = System.getProperty("tomlLocation")!!
         private val libsKeys: List<String>
-        private val jsLibs = setOf("ktor-client-js", "kui")
+        private val jsLibs = setOf("asyncLite", "ktor-client-js", "kui")
 
         init {
             val mapper = TomlMapper()
