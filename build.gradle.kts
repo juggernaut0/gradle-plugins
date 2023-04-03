@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    api(project(":download-firefox"))
+
     implementation("de.undercouch:gradle-download-task:5.3.1")
     implementation("com.bmuschko.docker-remote-api:com.bmuschko.docker-remote-api.gradle.plugin:9.2.1")
 
