@@ -2,7 +2,7 @@
 dagger = "2.45"
 ktor = "2.2.4"
 multiplatform-utils = "0.7.0"
-twarner-auth = "16"
+twarner-auth = "20"
 
 [libraries]
 asyncLite = { module = "com.github.juggernaut0:async-lite", version = "0.3.0" }
