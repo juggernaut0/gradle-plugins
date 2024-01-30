@@ -12,7 +12,7 @@ config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
-flyway-core = { module = "org.flywaydb:flyway-core", version = "9.16.1" }
+flyway-core = { module = "org.flywaydb:flyway-core", version = "10.7.1" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.4" }
 
