@@ -56,5 +56,5 @@ r2dbc-postgresql = [
 ]
 
 [plugins]
-jooq = "nu.studer.jooq:8.1"
+jooq = "nu.studer.jooq:9.0"
 docker-api = "com.bmuschko.docker-remote-api:9.3.0"
