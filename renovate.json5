@@ -7,7 +7,7 @@
     {
       customType: "regex",
       fileMatch: ["managedDependencies$"],
-      matchStrings: ["(?<depName>.*:.*):(?<currentValue>.*)\\n"],
+      matchStrings: [".*=(?<depName>.*:.*):(?<currentValue>.*)\\n"],
       datasourceTemplate: "maven",
     }
   ],

@@ -26,8 +26,8 @@ class KotlinApiPlugin : Plugin<Project> {
         }
 
         project.dependencies {
-            for (dep in readManagedDependencies()) {
-                add("commonMainApi", dep)
+            for ((config, dep) in readManagedDependencies()) {
+                add(config, dep)
             }
         }
 
@@ -42,7 +42,10 @@ class KotlinApiPlugin : Plugin<Project> {
         }
     }
 
-    private fun readManagedDependencies(): List<String> {
-        return this::class.java.getResourceAsStream("/kotlin-api/managedDependencies")!!.bufferedReader().readLines()
+    private fun readManagedDependencies(): List<Pair<String, String>> {
+        return this::class.java.getResourceAsStream("/kotlin-api/managedDependencies")!!
+            .bufferedReader()
+            .readLines()
+            .map { it.split("=").let { p -> p[0] to p[1] } }
     }
 }
