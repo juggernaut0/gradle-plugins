@@ -7,8 +7,6 @@ plugins {
 }
 
 group = "dev.twarner"
-val projectVersion: String by rootProject
-version = projectVersion
 
 repositories {
     mavenCentral()
@@ -16,12 +14,8 @@ repositories {
 }
 
 dependencies {
-    api(project(":download-firefox"))
-
     implementation("de.undercouch:gradle-download-task:5.4.0")
     implementation("com.bmuschko.docker-remote-api:com.bmuschko.docker-remote-api.gradle.plugin:9.3.0")
-
-    compileOnly(kotlin("gradle-plugin"))
 
     testImplementation(kotlin("test"))
 }
@@ -32,29 +26,50 @@ gradlePlugin {
             id = "dev.twarner.docker"
             implementationClass = "dev.twarner.gradle.DockerPlugin"
         }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "pages"
-            url = uri("$rootDir/pages/m2/repository")
+        create("settings") {
+            id = "dev.twarner.settings"
+            implementationClass = "dev.twarner.gradle.SettingsPlugin"
         }
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-}
+    withType<KotlinCompile>().configureEach {
+        kotlinOptions.jvmTarget = "17"
+    }
 
-afterEvaluate {
-    tasks.compileTestKotlin {
-        kotlinOptions.languageVersion = "1.7"
-        kotlinOptions.apiVersion = "1.7"
+    val collectPluginIds by registering {
+        outputs.upToDateWhen { false }
+        val outputFile = temporaryDir.resolve("managedIds.txt")
+        outputs.file(outputFile)
+        val ids = mutableListOf<String>()
+        allprojects {
+            pluginManager.withPlugin("java-gradle-plugin") {
+                configure<GradlePluginDevelopmentExtension> {
+                    ids.addAll(plugins.map { it.id })
+                }
+            }
+        }
+        doLast {
+            outputFile.writeText(ids.joinToString(separator = "\n", postfix = "\n"))
+        }
+    }
+
+    val generateBuildInfo by registering {
+        val outputFile = layout.buildDirectory.file("build-info.properties")
+        inputs.property("version", version.toString())
+        outputs.file(outputFile)
+        doLast {
+            outputFile.get().asFile.writeText("version=$version")
+        }
+    }
+
+    processResources {
+        from(generateBuildInfo)
+        from(collectPluginIds)
     }
 }

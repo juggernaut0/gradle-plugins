@@ -4,8 +4,6 @@ plugins {
 }
 
 group = "dev.twarner"
-val projectVersion: String by rootProject
-version = projectVersion
 
 catalog {
     versionCatalog {
@@ -17,12 +15,6 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["versionCatalog"])
-        }
-    }
-    repositories {
-        maven {
-            name = "pages"
-            url = uri("$rootDir/pages/m2/repository")
         }
     }
 }

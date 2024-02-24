@@ -4,8 +4,6 @@ plugins {
 }
 
 group = "dev.twarner"
-val projectVersion: String by rootProject
-version = projectVersion
 
 repositories {
     gradlePluginPortal()
@@ -13,13 +11,4 @@ repositories {
 
 dependencies {
     implementation(kotlin("gradle-plugin"))
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "pages"
-            url = uri("$rootDir/pages/m2/repository")
-        }
-    }
 }

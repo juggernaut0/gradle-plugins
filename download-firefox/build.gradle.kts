@@ -12,13 +12,3 @@ dependencies {
 }
 
 group = "dev.twarner"
-val projectVersion: String by rootProject
-version = projectVersion
-publishing {
-    repositories {
-        maven {
-            name = "pages"
-            url = uri("$rootDir/pages/m2/repository")
-        }
-    }
-}
