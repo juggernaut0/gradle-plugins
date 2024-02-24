@@ -17,7 +17,8 @@ abstract class DownloadFirefoxTask : DefaultTask() {
     abstract val outputBin: RegularFileProperty
 
     init {
-        version.convention("111.0.1")
+        // always run, because download will skip if file already exists
+        outputs.upToDateWhen { false }
     }
 
     @TaskAction

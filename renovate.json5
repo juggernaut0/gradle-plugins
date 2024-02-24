@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "config:base",
+    "group:allNonMajor"
+  ],
+  customManagers: [
+    {
+      customType: "regex",
+      fileMatch: ["managedDependencies$"],
+      matchStrings: ["(?<depName>.*:.*):(?<currentValue>.*)\\n"],
+      datasourceTemplate: "maven",
+    }
+  ],
+}

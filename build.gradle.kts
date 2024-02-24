@@ -6,7 +6,9 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.twarner"
+allprojects {
+    group = "dev.twarner.gradle"
+}
 
 repositories {
     mavenCentral()
