@@ -32,7 +32,7 @@ abstract class GenerateMigrationHelperTask : DefaultTask() {
         destDir.mkdirs()
         val destFile = destDir.resolve("DbMigration.java")
 
-        val contents = GenerateMigrationHelperTask::class.java.getResourceAsStream("/dev/twarner/gradle/db/DbMigration.java")!!
+        val contents = GenerateMigrationHelperTask::class.java.getResourceAsStream("/db/DbMigration.java")!!
             .bufferedReader()
             .readText()
         destFile.writeText("package $packageName;\n\n")

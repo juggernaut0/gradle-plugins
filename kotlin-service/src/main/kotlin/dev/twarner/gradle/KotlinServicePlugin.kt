@@ -11,6 +11,7 @@ import org.gradle.kotlin.dsl.register
 
 class KotlinServicePlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        project.pluginManager.apply("dev.twarner.common")
         project.pluginManager.apply("org.jetbrains.kotlin.jvm")
         project.pluginManager.apply("application")
         project.pluginManager.apply(DockerPlugin::class.java)

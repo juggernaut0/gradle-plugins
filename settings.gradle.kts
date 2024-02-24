@@ -11,6 +11,8 @@ include(
     "kotlin",
     "kotlin-api",
     "kotlin-service",
+    "kotlin-web",
+    "sass",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
