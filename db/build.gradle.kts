@@ -9,6 +9,7 @@ repositories {
 }
 
 dependencies {
+    implementation(projects.commonUtils)
     implementation("org.jooq:jooq-codegen:3.19.3")
     runtimeOnly("org.postgresql:postgresql:42.7.1")
     implementation("com.github.docker-java:docker-java-core:3.3.4")

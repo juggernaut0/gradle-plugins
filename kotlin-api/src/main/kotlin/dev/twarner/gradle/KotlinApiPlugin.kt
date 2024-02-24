@@ -26,7 +26,7 @@ class KotlinApiPlugin : Plugin<Project> {
         }
 
         project.dependencies {
-            for ((config, dep) in readManagedDependencies()) {
+            for ((config, dep) in readManagedDependencies("kotlin-api")) {
                 add(config, dep)
             }
         }
@@ -40,12 +40,5 @@ class KotlinApiPlugin : Plugin<Project> {
         kotlinExt.sourceSets.named("commonMain") {
             kotlin.srcDir(generateApiTask.flatMap { it.outputDir })
         }
-    }
-
-    private fun readManagedDependencies(): List<Pair<String, String>> {
-        return this::class.java.getResourceAsStream("/kotlin-api/managedDependencies")!!
-            .bufferedReader()
-            .readLines()
-            .map { it.split("=").let { p -> p[0] to p[1] } }
     }
 }

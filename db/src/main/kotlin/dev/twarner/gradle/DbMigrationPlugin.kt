@@ -15,7 +15,7 @@ class DbMigrationPlugin : Plugin<Project> {
         }
 
         project.dependencies {
-            for ((config, dep) in readManagedDependencies()) {
+            for ((config, dep) in readManagedDependencies("db")) {
                 add(config, dep)
             }
         }
@@ -59,12 +59,5 @@ class DbMigrationPlugin : Plugin<Project> {
             databaseName.set(project.group.toString())
             postgresVersion.set("16")
         }
-    }
-
-    private fun readManagedDependencies(): List<Pair<String, String>> {
-        return this::class.java.getResourceAsStream("/db/managedDependencies")!!
-            .bufferedReader()
-            .readLines()
-            .map { it.split("=").let { p -> p[0] to p[1] } }
     }
 }

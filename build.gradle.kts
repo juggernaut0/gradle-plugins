@@ -24,10 +24,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("docker") {
-            id = "dev.twarner.docker"
-            implementationClass = "dev.twarner.gradle.DockerPlugin"
-        }
         create("settings") {
             id = "dev.twarner.settings"
             implementationClass = "dev.twarner.gradle.SettingsPlugin"
