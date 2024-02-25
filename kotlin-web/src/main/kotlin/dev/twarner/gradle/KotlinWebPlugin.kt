@@ -4,20 +4,40 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.attributes.Usage
 import org.gradle.api.tasks.bundling.Zip
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.register
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 class KotlinWebPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.pluginManager.apply("dev.twarner.common")
+        project.pluginManager.apply("dev.twarner.download-firefox")
         project.pluginManager.apply("org.jetbrains.kotlin.multiplatform")
         project.pluginManager.apply(SassPlugin::class.java)
 
-        val kotlinExt = project.extensions.getByType(org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension::class.java)
-        kotlinExt.apply {
+        project.configure<KotlinMultiplatformExtension> {
             js {
-                browser()
+                browser {
+                    testTask {
+                        useKarma {
+                            useFirefoxHeadless()
+                        }
+                        if (System.getProperty("os.name").contains("Mac")) {
+                            doFirst {
+                                environment("FIREFOX_BIN", "/Applications/Firefox.app/Contents/MacOS/firefox")
+                            }
+                        } else {
+                            val downloadFirefox = project.tasks.named<DownloadFirefoxTask>("downloadFirefox")
+                            dependsOn(downloadFirefox)
+                            doFirst {
+                                environment("FIREFOX_BIN", downloadFirefox.flatMap { it.outputBin }.get().asFile.absolutePath)
+                            }
+                        }
+                    }
+                }
                 binaries.executable()
             }
         }

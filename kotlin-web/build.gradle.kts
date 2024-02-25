@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(projects.sass)
+    implementation(projects.downloadFirefox)
 }
 
 gradlePlugin {
