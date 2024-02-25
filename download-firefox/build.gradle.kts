@@ -1,6 +1,7 @@
 plugins {
     `kotlin-dsl`
     `maven-publish`
+    conventions.`jvm-target`
 }
 
 repositories {
@@ -10,5 +11,3 @@ repositories {
 dependencies {
     implementation("de.undercouch:gradle-download-task:5.3.1")
 }
-
-group = "dev.twarner"

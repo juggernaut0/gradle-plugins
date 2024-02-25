@@ -3,8 +3,6 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.twarner"
-
 catalog {
     versionCatalog {
         this.from(files(projectDir.resolve("catalog.versions.toml")))

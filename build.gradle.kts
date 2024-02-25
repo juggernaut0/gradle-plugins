@@ -6,26 +6,17 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.twarner"
+allprojects {
+    group = "dev.twarner.gradle"
+}
 
 repositories {
     mavenCentral()
     gradlePluginPortal()
 }
 
-dependencies {
-    implementation("de.undercouch:gradle-download-task:5.4.0")
-    implementation("com.bmuschko.docker-remote-api:com.bmuschko.docker-remote-api.gradle.plugin:9.3.0")
-
-    testImplementation(kotlin("test"))
-}
-
 gradlePlugin {
     plugins {
-        create("docker") {
-            id = "dev.twarner.docker"
-            implementationClass = "dev.twarner.gradle.DockerPlugin"
-        }
         create("settings") {
             id = "dev.twarner.settings"
             implementationClass = "dev.twarner.gradle.SettingsPlugin"
