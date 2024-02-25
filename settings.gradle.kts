@@ -8,10 +8,10 @@ include(
     "db",
     "docker",
     "download-firefox",
-    "kotlin",
     "kotlin-api",
     "kotlin-service",
     "kotlin-web",
+    "kotlin-yarn",
     "sass",
 )
 
