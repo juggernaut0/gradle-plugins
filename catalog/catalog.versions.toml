@@ -4,7 +4,7 @@ config4k = "0.6.0"
 dagger = "2.50"
 flyway = "10.8.1"
 hikari = "5.1.0"
-javalin = "6.1.1"
+javalin = "6.1.2"
 kotlinx-coroutines = "1.8.0"
 kotlinx-datetime = "0.5.0"
 ktor = "2.3.8"
@@ -60,7 +60,7 @@ multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils
 
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
-r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.0.RELEASE" }
+r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.1.RELEASE" }
 r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
 
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.12" }
