@@ -1,20 +1,39 @@
 [versions]
-dagger = "2.45"
-ktor = "2.2.4"
-multiplatform-utils = "0.7.0"
-twarner-auth = "20"
+asyncLite = "0.3.0"
+config4k = "0.6.0"
+dagger = "2.50"
+flyway = "10.8.1"
+hikari = "5.1.0"
+javalin = "6.1.1"
+kotlinx-coroutines = "1.8.0"
+kotlinx-datetime = "0.5.0"
+ktor = "2.3.8"
+kui = "0.15.0"
+logback = "1.5.0"
+mockk = "1.13.9"
+multiplatformUtils = "0.10.0"
+postgresql = "42.7.2"
+twarner-auth = "21"
 
 [libraries]
-asyncLite = { module = "com.github.juggernaut0:async-lite", version = "0.3.0" }
+asyncLite = { module = "com.github.juggernaut0:async-lite", version.ref = "asyncLite" }
 
-config4k = { module = "io.github.config4k:config4k", version = "0.5.0" }
+config4k = { module = "io.github.config4k:config4k", version.ref = "config4k" }
 
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
-flyway-core = { module = "org.flywaydb:flyway-core", version = "9.16.1" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+flyway-postgres = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
 
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.4" }
+hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
+
+javalin = { module = "io.javalin:javalin", version.ref = "javalin" }
+javalin-testtools = { module = "io.javalin:javalin-testtools", version.ref = "javalin" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
@@ -22,25 +41,33 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
+ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor" }
 ktor-server-callLogging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
 ktor-server-jetty = { module = "io.ktor:ktor-server-jetty", version.ref = "ktor" }
 ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
 ktor-server-testHost = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
-kui = { module = "com.github.juggernaut0.kui:kui", version = "0.15.0" }
+kui = { module = "com.github.juggernaut0.kui:kui", version.ref = "kui" }
 
-logback = { module = "ch.qos.logback:logback-classic", version = "1.4.6" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
-multiplatformUtils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatform-utils" }
-multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatform-utils" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
-postgresql = { module = "org.postgresql:postgresql", version = "42.6.0" }
+multiplatformUtils = { module = "com.github.juggernaut0:multiplatform-utils", version.ref = "multiplatformUtils" }
+multiplatformUtils-javalin = { module = "com.github.juggernaut0:multiplatform-utils-javalin", version.ref = "multiplatformUtils" }
+multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils-ktor", version.ref = "multiplatformUtils" }
+
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
 r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.0.RELEASE" }
 r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
 
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.12" }
+
 twarner-auth-common = { module = "dev.twarner.auth:auth-common", version.ref = "twarner-auth" }
+twarner-auth-plugins-javalin = { module = "dev.twarner.auth:auth-plugins-javalin", version.ref = "twarner-auth" }
+twarner-auth-plugins-ktor = { module = "dev.twarner.auth:auth-plugins-ktor", version.ref = "twarner-auth" }
 twarner-auth-ui = { module = "dev.twarner.auth:auth-ui", version.ref = "twarner-auth" }
 
 [bundles]
@@ -54,7 +81,3 @@ r2dbc-postgresql = [
     "r2dbc-postgresql",
     "r2dbc-pool",
 ]
-
-[plugins]
-jooq = "nu.studer.jooq:8.1"
-docker-api = "com.bmuschko.docker-remote-api:9.3.0"

@@ -17,7 +17,7 @@ class SettingsPlugin : Plugin<Settings> {
 
             versionCatalogs {
                 create("libs") {
-                    from("dev.twarner:catalog:$currentVersion")
+                    from("dev.twarner.gradle:catalog:$currentVersion")
                 }
             }
         }
