@@ -10,10 +10,10 @@ repositories {
 
 dependencies {
     implementation(projects.commonUtils)
-    implementation("org.jooq:jooq-codegen:3.19.3")
-    runtimeOnly("org.postgresql:postgresql:42.7.1")
-    implementation("com.github.docker-java:docker-java-core:3.3.4")
-    implementation("com.github.docker-java:docker-java-transport-zerodep:3.3.4")
+    implementation("org.jooq:jooq-codegen:3.19.4")
+    runtimeOnly("org.postgresql:postgresql:42.7.2")
+    implementation("com.github.docker-java:docker-java-core:3.3.5")
+    implementation("com.github.docker-java:docker-java-transport-zerodep:3.3.5")
 }
 
 gradlePlugin {
