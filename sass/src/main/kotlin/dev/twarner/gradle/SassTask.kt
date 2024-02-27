@@ -23,6 +23,10 @@ abstract class SassTask : DefaultTask() {
     @get:Input
     abstract val version: Property<String>
 
+    init {
+        onlyIf { inputDir.get().asFile.let { it.exists() && it.isDirectory } }
+    }
+
     @TaskAction
     fun run() {
         val version = version.get()

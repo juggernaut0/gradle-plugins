@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.cloud.tools:jib-gradle-plugin:3.4.0")
+    implementation("com.google.cloud.tools:jib-gradle-plugin:3.4.1")
 }
 
 gradlePlugin {
