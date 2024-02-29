@@ -4,6 +4,7 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     `maven-publish`
+    conventions.`jvm-target`
 }
 
 allprojects {
