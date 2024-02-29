@@ -56,7 +56,7 @@ class DbMigrationPlugin : Plugin<Project> {
 
         project.tasks.register("startTestDb", StartTestDbTask::class.java) {
             description = "Starts a test database"
-            databaseName.set(project.group.toString())
+            databaseName.set(project.group.toString().split('.').lastOrNull())
             postgresVersion.set("16")
         }
     }
