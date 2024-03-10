@@ -1,4 +1,4 @@
-api=org.jooq:jooq:3.19.5
-implementation=org.flywaydb:flyway-core:10.8.1
-runtimeOnly=org.flywaydb:flyway-database-postgresql:10.8.1
+api=org.jooq:jooq:3.19.6
+implementation=org.flywaydb:flyway-core:10.9.1
+runtimeOnly=org.flywaydb:flyway-database-postgresql:10.9.1
 runtimeOnly=org.postgresql:postgresql:42.7.2
