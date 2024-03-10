@@ -9,6 +9,8 @@ include(
     "docker",
     "download-firefox",
     "kotlin-api",
+    "kotlin-graphql",
+    "kotlin-graphql:support",
     "kotlin-service",
     "kotlin-web",
     "kotlin-yarn",
