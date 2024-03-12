@@ -41,7 +41,7 @@ fun createModelsFile(packageName: String, schemas: List<Schema<Any>>): FileSpec 
     return file.build()
 }
 
-fun FileSpec.Builder.appendModel(packageName: String, schema: Schema<Any>) {
+private fun FileSpec.Builder.appendModel(packageName: String, schema: Schema<Any>) {
     requireNotNull(schema.name) { "Schema must have a name" }
 
     val type = TypeSpec.classBuilder(schema.name)

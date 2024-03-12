@@ -68,7 +68,7 @@ repository with the maven-publish plugin.
 
 At build time, query files will be validated against the schema specified in the `# schema` comment on the first line of 
 the query file. If this comment is not present, the plugin will try to validate against *any* schema that is present or 
-has been imported.
+has been imported. If the query cannot be validated, the build will fail.
 
 There will be at least two class generated per query file, a query and a query response. The query will take any query 
 variables as constructor parameters, and the response will contain properties corresponding to the queried fields.
