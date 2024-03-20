@@ -15,7 +15,7 @@ dependencies {
 }
 ```
 
-Put schema and queries in `src/main/graphql`. Schema files are named *.graphqls. Query files are named *.graphqlq.
+Put schema and queries in `src/main/graphql`. Schema files are named *.graphqls. Query files are named *.graphql.
 
 The plugin will generate Kotlin sources for resolver stubs for any schema files present. It will also validate queries 
 and generate query objects for any query files present.
@@ -73,7 +73,7 @@ has been imported. If the query cannot be validated, the build will fail.
 There will be at least two class generated per query file, a query and a query response. The query will take any query 
 variables as constructor parameters, and the response will contain properties corresponding to the queried fields.
 
-`example.graphqlq`
+`example.graphql`
 
 ```
 # schema example

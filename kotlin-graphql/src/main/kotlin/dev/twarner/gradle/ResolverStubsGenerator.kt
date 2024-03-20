@@ -27,7 +27,7 @@ private class ResolverStubsGenerator(
     schemaFileName: String,
     val packageName: String,
 ) {
-    private val namePrefix = schemaNamePrefix(schemaFileName)
+    private val namePrefix = schemaFileName.toCamelCase()
 
     fun generateFile(types: TypeDefinitionRegistry): FileSpec {
         val file = FileSpec.builder(packageName, "${namePrefix}Resolvers")
@@ -71,7 +71,7 @@ private class ResolverStubsGenerator(
             .returns(GraphQLSchema::class)
 
         val schemaStr = SchemaPrinter(SchemaPrinter.Options.defaultOptions().includeDirectives(SchemaPrinter.ExcludeGraphQLSpecifiedDirectivesPredicate))
-            .print(SchemaGenerator().makeExecutableSchema(types, RuntimeWiring.newRuntimeWiring().build()))
+            .print(unwiredSchema(types))
         funBuilder.addStatement("val types = %T().parse(%S)", SchemaParser::class, schemaStr)
 
         val wiringBuilder = CodeBlock.builder()
@@ -104,18 +104,13 @@ private class ResolverStubsGenerator(
             is ListType -> List::class.asTypeName().parameterizedBy(type.typeName()).copy(nullable = true)
             is NonNullType -> type.typeName().copy(nullable = false)
             is graphql.language.TypeName -> when (name) {
-                "String", "ID" -> String::class.asTypeName()
-                "Int" -> Int::class.asTypeName()
-                "Boolean" -> Boolean::class.asTypeName()
+                "String", "ID" -> STRING
+                "Int" -> INT
+                "Float" -> DOUBLE
+                "Boolean" -> BOOLEAN
                 else -> ClassName(packageName, "${namePrefix}${name}Resolver")
             }.copy(nullable = true)
             else -> throw IllegalArgumentException("Unsupported type: $this")
         }
     }
-}
-
-private fun schemaNamePrefix(filename: String): String {
-    return filename
-        .split('-', '_')
-        .joinToString(separator = "") { it.replaceFirstChar { c -> c.uppercaseChar() } }
 }
