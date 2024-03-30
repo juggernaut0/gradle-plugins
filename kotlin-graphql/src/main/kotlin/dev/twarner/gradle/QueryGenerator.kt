@@ -3,6 +3,7 @@ package dev.twarner.gradle
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import graphql.ExecutionInput
+import graphql.GraphQLError
 import graphql.ParseAndValidate
 import graphql.Scalars
 import graphql.language.Field
@@ -24,7 +25,11 @@ fun generateQuery(queryFile: Path, validationSchemaFile: Path, outputDir: Path, 
         .build()
     val validationSchema = unwiredSchema(validationSchemaFile)
     val result = ParseAndValidate.parseAndValidate(validationSchema, execInput)
-    // TODO handle errors
+
+    if (result.isFailure) {
+        throw QueryValidationException(result.errors)
+    }
+
     val document = result.document
     val queryGenerator = QueryGenerator(queryFile.nameWithoutExtension, packageName, validationSchema)
     for (def in document.definitions) {
@@ -34,6 +39,8 @@ fun generateQuery(queryFile: Path, validationSchemaFile: Path, outputDir: Path, 
         }
     }
 }
+
+class QueryValidationException(errors: List<GraphQLError>) : RuntimeException(errors.toString())
 
 class QueryGenerator(
     queryFileName: String,

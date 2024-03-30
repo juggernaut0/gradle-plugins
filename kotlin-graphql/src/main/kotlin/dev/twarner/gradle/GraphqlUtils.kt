@@ -1,5 +1,6 @@
 package dev.twarner.gradle
 
+import graphql.language.InterfaceTypeDefinition
 import graphql.schema.GraphQLSchema
 import graphql.schema.idl.RuntimeWiring
 import graphql.schema.idl.SchemaGenerator
@@ -13,9 +14,16 @@ fun unwiredSchema(path: Path): GraphQLSchema {
 }
 
 fun unwiredSchema(types: TypeDefinitionRegistry): GraphQLSchema {
+    val interfaces = types.types().values.filterIsInstance<InterfaceTypeDefinition>()
     return SchemaGenerator().makeExecutableSchema(
         types,
-        RuntimeWiring.newRuntimeWiring().build()
+        RuntimeWiring.newRuntimeWiring()
+            .apply {
+                for (iface in interfaces) {
+                    type(iface.name) { builder -> builder.typeResolver { error("TypeResolver in unwired schema called") } }
+                }
+            }
+            .build()
     )
 }
 

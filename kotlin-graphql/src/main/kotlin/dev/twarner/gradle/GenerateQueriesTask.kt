@@ -8,10 +8,8 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.internal.exceptions.MultiCauseException
+import java.nio.file.Path
 import kotlin.io.path.bufferedReader
-import kotlin.io.path.nameWithoutExtension
-import kotlin.io.path.reader
 
 abstract class GenerateQueriesTask : DefaultTask() {
     @get:InputFiles
@@ -35,28 +33,48 @@ abstract class GenerateQueriesTask : DefaultTask() {
 
         outputDirectory.deleteRecursively()
 
+        var generationFailed = false
+
         for (queryFile in queryFiles) {
             val firstLine = queryFile.bufferedReader().readLine() ?: continue
             if (firstLine.startsWith("# schema ")) {
                 val schemaName = firstLine.removePrefix("# schema ")
                 val schemaFile = schemaFiles[schemaName] ?: error("No schema file found for $schemaName")
-                generateQuery(queryFile, schemaFile, outputDirectory.toPath(), packageName)
+                try {
+                    generateQuery(queryFile, schemaFile, outputDirectory.toPath(), packageName)
+                } catch (e: Exception) {
+                    logGenerationError(queryFile, e)
+                    generationFailed = true
+                }
             } else {
                 val parentExc = RuntimeException("No schema file found to validate query file $queryFile")
-                var success = false
+                var validationSuccess = false
                 for (schemaFile in schemaFiles.values) {
                     try {
                         generateQuery(queryFile, schemaFile, outputDirectory.toPath(), packageName)
-                        success = true
+                        validationSuccess = true
                         break
-                    } catch (e: Exception) {
+                    } catch (e: QueryValidationException) {
                         parentExc.addSuppressed(e)
+                    } catch (e: Exception) {
+                        logGenerationError(queryFile, e)
+                        generationFailed = true
+                        validationSuccess = true
+                        break
                     }
                 }
-                if (!success) {
+                if (!validationSuccess) {
                     throw parentExc
                 }
             }
         }
+
+        if (generationFailed) {
+            error("Query generation failed. Check logs for errors")
+        }
+    }
+
+    private fun logGenerationError(file: Path, e: Exception) {
+        logger.quiet("e: $file: ${e.message}")
     }
 }
