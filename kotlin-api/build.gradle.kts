@@ -15,7 +15,7 @@ dependencies {
     implementation(projects.downloadFirefox)
     implementation(projects.commonUtils)
     implementation("io.swagger.parser.v3:swagger-parser:2.1.21")
-    implementation("com.squareup:kotlinpoet:1.16.0")
+    implementation("com.squareup:kotlinpoet:2.1.0")
 }
 
 gradlePlugin {
