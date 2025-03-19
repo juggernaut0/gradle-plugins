@@ -1,8 +1,5 @@
 package dev.twarner.gradle
 
-import com.github.dockerjava.core.DefaultDockerClientConfig
-import com.github.dockerjava.core.DockerClientImpl
-import com.github.dockerjava.zerodep.ZerodepDockerHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
@@ -15,11 +12,11 @@ abstract class StartTestDbTask : DefaultTask() {
     @get:Input
     abstract val postgresVersion: Property<String>
 
+    private val dockerClientProvider: DockerClientProvider = project.objects.newInstance(DockerClientProvider::class.java)
+
     @TaskAction
     fun start() {
-        val config = DefaultDockerClientConfig.createDefaultConfigBuilder().build();
-        val httpClient = ZerodepDockerHttpClient.Builder().dockerHost(config.dockerHost).build()
-        val dockerClient = DockerClientImpl.getInstance(config, httpClient)
+        val dockerClient = dockerClientProvider.newDockerClient()
 
         val existing = dockerClient.listContainersCmd().withNameFilter(listOf("test-db")).exec().firstOrNull()
 
