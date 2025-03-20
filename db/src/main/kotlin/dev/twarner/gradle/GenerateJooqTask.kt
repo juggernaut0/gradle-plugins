@@ -1,8 +1,5 @@
 package dev.twarner.gradle
 
-import com.github.dockerjava.core.DefaultDockerClientConfig
-import com.github.dockerjava.core.DockerClientImpl
-import com.github.dockerjava.zerodep.ZerodepDockerHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
@@ -33,6 +30,8 @@ abstract class GenerateJooqTask : DefaultTask() {
     @get:OutputDirectory
     abstract val generatedSrcDir: DirectoryProperty
 
+    private val dockerClientProvider: DockerClientProvider = project.objects.newInstance(DockerClientProvider::class.java)
+
     @TaskAction
     fun generate() {
         createContainer().use {
@@ -45,9 +44,7 @@ abstract class GenerateJooqTask : DefaultTask() {
     }
 
     private fun createContainer(): PostgresContainer {
-        val config = DefaultDockerClientConfig.createDefaultConfigBuilder().build();
-        val httpClient = ZerodepDockerHttpClient.Builder().dockerHost(config.dockerHost).build()
-        val dockerClient = DockerClientImpl.getInstance(config, httpClient)
+        val dockerClient = dockerClientProvider.newDockerClient()
         return PostgresContainer.new(dockerClient, postgresVersion.get(), "jooq-postgres")
     }
 
