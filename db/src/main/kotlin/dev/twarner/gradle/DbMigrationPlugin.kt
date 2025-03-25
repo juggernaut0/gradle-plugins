@@ -45,7 +45,7 @@ class DbMigrationPlugin : Plugin<Project> {
             migrationClasspath.setFrom(migrateSourceSet.runtimeClasspath)
             migratorMainClass.set(generateMigrationHelperTask.flatMap { it.migratorMainCLass })
             packageName.set("${project.group}.db.jooq")
-            postgresVersion.set("16")
+            postgresVersion.set("17")
             generatedSrcDir.set(project.layout.buildDirectory.dir("generated/source/jooq"))
         }
 
@@ -57,7 +57,7 @@ class DbMigrationPlugin : Plugin<Project> {
         project.tasks.register("startTestDb", StartTestDbTask::class.java) {
             description = "Starts a test database"
             databaseName.set(project.group.toString().split('.').lastOrNull())
-            postgresVersion.set("16")
+            postgresVersion.set("17")
         }
     }
 }
