@@ -13,7 +13,7 @@ logback = "1.5.18"
 mockk = "1.13.17"
 multiplatformUtils = "0.10.0"
 postgresql = "42.7.5"
-twarner-auth = "23"
+twarner-auth = "24"
 
 [libraries]
 asyncLite = { module = "com.github.juggernaut0:async-lite", version.ref = "asyncLite" }
