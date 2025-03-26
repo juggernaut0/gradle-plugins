@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
@@ -28,10 +26,6 @@ gradlePlugin {
 tasks {
     test {
         useJUnitPlatform()
-    }
-
-    withType<KotlinCompile>().configureEach {
-        kotlinOptions.jvmTarget = "17"
     }
 
     val collectPluginIds by registering {

@@ -9,11 +9,13 @@ import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.getByName
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 import java.io.File
+import javax.inject.Inject
 
-abstract class YarnTask : DefaultTask() {
+abstract class YarnTask @Inject constructor(private val execOperations: ExecOperations) : DefaultTask() {
     @get:Input
     @get:Optional
     abstract val arguments: ListProperty<String>
@@ -37,7 +39,7 @@ abstract class YarnTask : DefaultTask() {
         Files.deleteIfExists(link)
         Files.createSymbolicLink(link, target)*/
 
-        val nodeExecutable = nodeJs.nodeExecutable
+        val nodeExecutable = nodeJs.executable
 
         val path = if (!yarn.ignoreScripts) {
             val nodePath = if (nodeJs.isWindows) {
@@ -54,7 +56,7 @@ abstract class YarnTask : DefaultTask() {
         //val arguments = listOf("--modules-folder=$modulesFolder") + arguments.orNull.orEmpty()
         val arguments = arguments.orNull.orEmpty()
 
-        project.exec {
+        execOperations.exec {
             if (path != null) {
                 environment("PATH", path)
             }

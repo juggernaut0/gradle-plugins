@@ -9,11 +9,13 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.process.ExecOperations
 import org.jooq.codegen.GenerationTool
 import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Target
+import javax.inject.Inject
 
-abstract class GenerateJooqTask : DefaultTask() {
+abstract class GenerateJooqTask @Inject constructor(private val execOperations: ExecOperations) : DefaultTask() {
     @get:InputFiles
     @get:Classpath
     abstract val migrationClasspath: ConfigurableFileCollection
@@ -49,7 +51,7 @@ abstract class GenerateJooqTask : DefaultTask() {
     }
 
     private fun runFlyway(url: String, username: String, password: String) {
-        project.javaexec {
+        execOperations.javaexec {
             mainClass.set(migratorMainClass)
             classpath = migrationClasspath
             args = listOf(url, username, password)

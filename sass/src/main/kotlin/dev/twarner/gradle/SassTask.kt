@@ -5,15 +5,17 @@ import org.gradle.api.GradleException
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
+import org.gradle.process.ExecOperations
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.nio.file.Path
+import javax.inject.Inject
 import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
 
-abstract class SassTask : DefaultTask() {
+abstract class SassTask @Inject constructor(private val execOperations: ExecOperations) : DefaultTask() {
     @get:InputDirectory
     abstract val inputDir: DirectoryProperty
 
@@ -64,7 +66,7 @@ abstract class SassTask : DefaultTask() {
             into(unpackDest)
         }
 
-        project.exec {
+        execOperations.exec {
             executable("$unpackDest/dart-sass/sass")
             args("--embed-sources", "${inputDir.get()}:${outputDir.get()}")
         }

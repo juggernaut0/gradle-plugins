@@ -1,18 +1,18 @@
 [versions]
 asyncLite = "0.3.0"
-config4k = "0.6.0"
-dagger = "2.51"
-flyway = "10.9.1"
+config4k = "0.7.0"
+dagger = "2.56.1"
+flyway = "10.22.0"
 hikari = "5.1.0"
-javalin = "6.1.3"
-kotlinx-coroutines = "1.8.0"
-kotlinx-datetime = "0.5.0"
-ktor = "2.3.9"
+javalin = "6.5.0"
+kotlinx-coroutines = "1.10.1"
+kotlinx-datetime = "0.6.2"
+ktor = "2.3.13"
 kui = "0.15.0"
-logback = "1.5.3"
-mockk = "1.13.10"
+logback = "1.5.18"
+mockk = "1.13.17"
 multiplatformUtils = "0.10.0"
-postgresql = "42.7.2"
+postgresql = "42.7.5"
 twarner-auth = "23"
 
 [libraries]
@@ -60,10 +60,10 @@ multiplatformUtils-ktor = { module = "com.github.juggernaut0:multiplatform-utils
 
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
-r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.1.RELEASE" }
+r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.2.RELEASE" }
 r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql", version = "0.8.13.RELEASE" }
 
-slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.12" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.17" }
 
 twarner-auth-common = { module = "dev.twarner.auth:auth-common", version.ref = "twarner-auth" }
 twarner-auth-plugins-javalin = { module = "dev.twarner.auth:auth-plugins-javalin", version.ref = "twarner-auth" }
