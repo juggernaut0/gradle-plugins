@@ -48,8 +48,10 @@ fun FileSpec.Builder.appendModel(packageName: String, schema: Schema<Any>) {
         .addModifiers(KModifier.DATA)
         .addAnnotation(ClassName("kotlinx.serialization", "Serializable"))
     val ctor = FunSpec.constructorBuilder()
+    val required = schema.required?.toSet().orEmpty()
     for ((name, property) in schema.properties.orEmpty()) {
-        val typeName = property.typeName(packageName)
+        val nullable = name !in required
+        val typeName = property.typeName(packageName).copy(nullable = nullable)
         ctor.addParameter(name, typeName)
         type.addProperty(PropertySpec.builder(name, typeName).initializer(name).build())
     }
